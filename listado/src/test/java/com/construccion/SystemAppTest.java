@@ -12,13 +12,14 @@ class SystemAppTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		systemApp = new SystemApp("jsonFile/", "employee.json");
+		systemApp = new SystemApp("../jsonFile/", "employee.json");
 	}
 
 	@Test
 	@DisplayName("Probando si verifica existencia")
 	void test() {
-		systemApp.verifyFileExistence();
+		
+		assertTrue(systemApp.verifyFileExistence());
 	}
 
 	@Test
@@ -31,7 +32,7 @@ class SystemAppTest {
 	@Test
 	@DisplayName("Probando si es un archivo valido")
 	void shouldIsValidFile() {
-		systemApp.isValidFile();
+		assertTrue(systemApp.isValidFile());
 	}
 	
 }
