@@ -21,12 +21,6 @@ class SystemAppTest {
 		
 		assertTrue(systemApp.verifyFileExistence());
 	}
-
-	@Test
-	@DisplayName("Probando si obtiene el texto del archivo")
-	void shouldGetJSONText() {
-		systemApp.getJsonText();
-	}
 	
 	
 	@Test
