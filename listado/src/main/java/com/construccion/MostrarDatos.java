@@ -18,10 +18,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         setModel();
         setDatos();
     }
-<<<<<<< HEAD
-    
-}
-=======
 
     private void setModel(){
         String[] header = {"Id","First name","Last name", "photo"};
@@ -137,6 +133,6 @@ public class MostrarDatos extends javax.swing.JFrame {
     private javax.swing.JTable employeeTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEmpleados;
-    // End of variables declaration                   
+    // End of variables declaration           
+
 }
->>>>>>> origin/development
