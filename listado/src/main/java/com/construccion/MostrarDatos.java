@@ -20,7 +20,7 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     private void setModel(){
-        String[] header = {"Id","First name","Last name", "photo"};
+        String[] header = {"Id°","First name","Last name", "photo"};
         tableModel.setColumnIdentifiers(header);
         employeeTable.setModel(tableModel);
     }
@@ -48,6 +48,9 @@ public class MostrarDatos extends javax.swing.JFrame {
         panelEmpleados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,17 +67,41 @@ public class MostrarDatos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(employeeTable);
 
+        btnAgregar.setText("Agregar");
+
+        jButton1.setText("Modificar");
+
+        jButton2.setText("Eliminar");
+
         javax.swing.GroupLayout panelEmpleadosLayout = new javax.swing.GroupLayout(panelEmpleados);
         panelEmpleados.setLayout(panelEmpleadosLayout);
         panelEmpleadosLayout.setHorizontalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelEmpleadosLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(btnAgregar)
+                        .addGap(70, 70, 70)
+                        .addComponent(jButton1)
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton2)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         panelEmpleadosLayout.setVerticalGroup(
             panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEmpleadosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(panelEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,9 +157,11 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JTable employeeTable;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEmpleados;
-    // End of variables declaration           
-
+    // End of variables declaration                   
 }
