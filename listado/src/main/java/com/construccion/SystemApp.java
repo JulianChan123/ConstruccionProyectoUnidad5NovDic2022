@@ -4,10 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class SystemApp {
     private String path;
@@ -18,7 +22,7 @@ public class SystemApp {
         this.fileName = fileName;
     }
 
-    boolean verifyFileExistence(){
+    public boolean verifyFileExistence(){
     	File file = new File(path, fileName);
         return file.exists();
     }
@@ -60,5 +64,10 @@ public class SystemApp {
         }else{
             return valid;
         }
+    }
+
+    public ArrayList<Employee> getObjects() throws JsonMappingException, JsonProcessingException{
+        JsonHandler jsonHandler = new JsonHandler();
+        return jsonHandler.getObjects(getJsonText());
     }
 }
