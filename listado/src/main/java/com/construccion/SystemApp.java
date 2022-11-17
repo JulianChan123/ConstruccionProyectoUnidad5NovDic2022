@@ -18,8 +18,8 @@ public class SystemApp {
         this.fileName = fileName;
     }
 
-    private boolean verifyFileExistence(){
-        File file = new File(path, fileName);
+    boolean verifyFileExistence(){
+    	File file = new File(path, fileName);
         return file.exists();
     }
 
