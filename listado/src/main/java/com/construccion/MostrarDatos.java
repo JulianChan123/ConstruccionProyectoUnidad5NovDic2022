@@ -2,6 +2,9 @@ package com.construccion;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 /**
  *
  * @author vmend
@@ -13,10 +16,13 @@ public class MostrarDatos extends javax.swing.JFrame {
      */
     DefaultTableModel tableModel = new DefaultTableModel();
     ArrayList<Object> employees = new ArrayList<>();
-    public MostrarDatos() {
+    SystemApp systemApp;
+    
+    public MostrarDatos() throws JsonMappingException, JsonProcessingException {
+        systemApp = new SystemApp("jsonFile/", "employee.json");
         initComponents();
         setModel();
-        setDatos();
+        setDatos(systemApp.getObjects());
     }
 
     private void setModel(){
@@ -25,15 +31,19 @@ public class MostrarDatos extends javax.swing.JFrame {
         employeeTable.setModel(tableModel);
     }
     
-    private void setDatos(){
+    private void setDatos(ArrayList<Employee> employeeList){
         Object[] data = new Object[tableModel.getColumnCount()];
         int i=1;
         tableModel.setRowCount(0);
-        data[0] = "1";
-        data[1] = "Enrique";
-        data[2] = "Poo";
-        data[3] = "foto";
-        tableModel.addRow(data);
+
+        for(Employee employee : employeeList){
+            data[0] = employee.getId();
+            data[1] = employee.getFirstName();
+            data[2] = employee.getLastName();
+            data[3] = employee.getPhoto();
+            i++;
+            tableModel.addRow(data);
+        }
         employeeTable.setModel(tableModel);
     }
     /**
@@ -151,7 +161,12 @@ public class MostrarDatos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MostrarDatos().setVisible(true);
+                try {
+                    new MostrarDatos().setVisible(true);
+                } catch (JsonProcessingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
     }
