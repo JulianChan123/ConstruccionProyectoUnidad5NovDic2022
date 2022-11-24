@@ -2,13 +2,11 @@ package com.construccion;
 
 import java.util.ArrayList;
 
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.io.IOException;
 import java.net.URL;
 import java.awt.image.BufferedImage;
@@ -56,7 +54,7 @@ public class MostrarDatos extends javax.swing.JFrame {
             data[0] = employee.getId();
             data[1] = employee.getFirstName();
             data[2] = employee.getLastName();
-            data[3] = changeURLtoImage("https://jsonformatter.org/img/tom-cruise.jpg");
+            data[3] = changeURLtoImage(employee.getPhoto());
             
             i++;
             tableModel.addRow(data);
