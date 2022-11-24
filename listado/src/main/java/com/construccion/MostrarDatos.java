@@ -16,13 +16,15 @@ public class MostrarDatos extends javax.swing.JFrame {
      */
     DefaultTableModel tableModel = new DefaultTableModel();
     SystemApp systemApp;
+    ArrayList<Employee> employeeList;
     
     public MostrarDatos() throws JsonMappingException, JsonProcessingException {
         systemApp = new SystemApp("jsonFile/", "employee.json");
         initComponents();
         setModel();
-        setDatos(systemApp.getEmployeeObjects());
-        systemApp.test();
+        employeeList = systemApp.getEmployeeObjects();
+        setDatos(employeeList);
+        systemApp.modifyJsonFile(employeeList);
     }
 
     private void setModel(){
