@@ -1,7 +1,6 @@
 package com.construccion;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class JsonHandler {
 
     public void modifyJsonFile(ArrayList<Employee> employeeList){
         try {
-            PrintWriter out = new PrintWriter(new FileWriter("C:/Users/vmend/Desktop/algo/employee.json"));
+            PrintWriter out = new PrintWriter(new FileWriter("./jsonFile/employee.json"));
             out.write(getJsonContent(employeeList).toString());
             out.close();
         } catch (Exception e) {
