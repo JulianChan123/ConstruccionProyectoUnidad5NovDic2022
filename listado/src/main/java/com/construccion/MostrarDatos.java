@@ -29,7 +29,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         }
     };
     
-    ArrayList<Object> employees = new ArrayList<>();
+    ArrayList<Employee> employeeList = new ArrayList<>();
     SystemApp systemApp;
     
     public MostrarDatos() throws JsonMappingException, JsonProcessingException {
