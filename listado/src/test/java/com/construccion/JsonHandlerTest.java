@@ -24,7 +24,7 @@ public class JsonHandlerTest {
 	@DisplayName("Probando si obtiene objetos")
 	void shouldGetObjects() throws JsonMappingException, JsonProcessingException  {
         ArrayList<Employee> employees = new ArrayList<Employee>();
-		employees = systemApp.getObjects();
+		employees = systemApp.getEmployeeObjects();
         assertNotNull(employees);
 	}
 

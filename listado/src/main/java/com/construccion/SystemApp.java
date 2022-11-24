@@ -66,8 +66,13 @@ public class SystemApp {
         }
     }
 
-    public ArrayList<Employee> getObjects() throws JsonMappingException, JsonProcessingException{
+    public ArrayList<Employee> getEmployeeObjects() throws JsonMappingException, JsonProcessingException{
         JsonHandler jsonHandler = new JsonHandler();
         return jsonHandler.getObjects(getJsonText());
+    }
+
+    public void test() throws JsonMappingException, JsonProcessingException{
+        JsonHandler jsonHandler = new JsonHandler();
+        jsonHandler.modifyJsonFile(getEmployeeObjects());
     }
 }

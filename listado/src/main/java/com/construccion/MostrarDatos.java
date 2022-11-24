@@ -15,14 +15,14 @@ public class MostrarDatos extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     DefaultTableModel tableModel = new DefaultTableModel();
-    ArrayList<Object> employees = new ArrayList<>();
     SystemApp systemApp;
     
     public MostrarDatos() throws JsonMappingException, JsonProcessingException {
         systemApp = new SystemApp("jsonFile/", "employee.json");
         initComponents();
         setModel();
-        setDatos(systemApp.getObjects());
+        setDatos(systemApp.getEmployeeObjects());
+        systemApp.test();
     }
 
     private void setModel(){

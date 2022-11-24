@@ -1,5 +1,8 @@
 package com.construccion;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -32,5 +35,30 @@ public class JsonHandler {
             employeeObjects.add(object);
         }
         return employeeObjects;
+    }
+
+    public void modifyJsonFile(ArrayList<Employee> employeeList){
+        try {
+            PrintWriter out = new PrintWriter(new FileWriter("C:/Users/vmend/Desktop/algo/employee.json"));
+            out.write(getJsonContent(employeeList).toString());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JSONObject getJsonContent(ArrayList<Employee> employeeList){
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonFile = new JSONObject();
+        for(int i = 0; i < employeeList.size(); i++){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id", employeeList.get(i).getId());
+            jsonObject.put("first name", employeeList.get(i).getFirstName());
+            jsonObject.put("last name", employeeList.get(i).getLastName());
+            jsonObject.put("photo", employeeList.get(i).getPhoto());
+            jsonArray.put(jsonObject);
+        }
+        jsonFile.put("employee",jsonArray);
+        return jsonFile;
     }
 }
