@@ -1,6 +1,15 @@
 package com.construccion;
+
 import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
+import java.awt.image.BufferedImage;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -14,7 +23,12 @@ public class MostrarDatos extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultTableModel tableModel = new DefaultTableModel() {
+        public Class getColumnClass(int column) {
+            return getValueAt(0, column).getClass();
+        }
+    };
+    
     ArrayList<Employee> employeeList = new ArrayList<>();
     SystemApp systemApp;
     
@@ -41,7 +55,7 @@ public class MostrarDatos extends javax.swing.JFrame {
             data[0] = employee.getId();
             data[1] = employee.getFirstName();
             data[2] = employee.getLastName();
-            data[3] = employee.getPhoto();
+            data[3] = changeURLtoImage(employee.getPhoto());
             i++;
             tableModel.addRow(data);
         }
@@ -266,6 +280,45 @@ public class MostrarDatos extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void changeURLtoImages(Object[][] employeesMatrix){
+        int i = 0;
+        for (Object[] employee: employeesMatrix) {
+
+            try {
+                ImageIcon imageIcon = new ImageIcon(ImageIO.read(new URL((String) employee[3])));
+                Image image = getScaledImage(imageIcon.getImage(), 50, 50);
+                imageIcon = new ImageIcon(image);
+                Icon icon = (Icon) imageIcon ;
+                employee[3] = icon ;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private Icon changeURLtoImage(String url){
+        try {
+            ImageIcon imageIcon = new ImageIcon(ImageIO.read(new URL(url)));
+            Image image = getScaledImage(imageIcon.getImage(), 50, 50);
+            imageIcon = new ImageIcon(image);
+            Icon icon = (Icon) imageIcon ;
+            return icon;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
     }
 
     // Variables declaration - do not modify                     
