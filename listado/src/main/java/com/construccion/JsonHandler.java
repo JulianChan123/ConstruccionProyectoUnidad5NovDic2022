@@ -52,8 +52,8 @@ public class JsonHandler {
         for(int i = 0; i < employeeList.size(); i++){
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", employeeList.get(i).getId());
-            jsonObject.put("first name", employeeList.get(i).getFirstName());
-            jsonObject.put("last name", employeeList.get(i).getLastName());
+            jsonObject.put("firstName", employeeList.get(i).getFirstName());
+            jsonObject.put("lastName", employeeList.get(i).getLastName());
             jsonObject.put("photo", employeeList.get(i).getPhoto());
             jsonArray.put(jsonObject);
         }
