@@ -56,6 +56,7 @@ public class MostrarDatos extends javax.swing.JFrame {
             data[1] = employee.getFirstName();
             data[2] = employee.getLastName();
             data[3] = changeURLtoImage(employee.getPhoto());
+            
             i++;
             tableModel.addRow(data);
         }
