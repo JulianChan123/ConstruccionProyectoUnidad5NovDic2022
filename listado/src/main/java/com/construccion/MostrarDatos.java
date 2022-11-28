@@ -289,22 +289,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         });
     }
 
-    private void changeURLtoImages(Object[][] employeesMatrix){
-        int i = 0;
-        for (Object[] employee: employeesMatrix) {
-
-            try {
-                ImageIcon imageIcon = new ImageIcon(ImageIO.read(new URL((String) employee[3])));
-                Image image = getScaledImage(imageIcon.getImage(), 50, 50);
-                imageIcon = new ImageIcon(image);
-                Icon icon = (Icon) imageIcon ;
-                employee[3] = icon ;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     private Icon changeURLtoImage(String url){
         try {
             ImageIcon imageIcon = new ImageIcon(ImageIO.read(new URL(url)));

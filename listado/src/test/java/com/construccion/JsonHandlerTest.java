@@ -21,11 +21,25 @@ public class JsonHandlerTest {
 	}
 
 	@Test
-	@DisplayName("Probando si obtiene objetos")
+	@DisplayName("Probando si los datos JSON se convierten a objetos")
 	void shouldGetObjects() throws JsonMappingException, JsonProcessingException  {
         ArrayList<Employee> employees = new ArrayList<Employee>();
 		employees = systemApp.getEmployeeObjects();
         assertNotNull(employees);
+	}
+
+	@Test
+	@DisplayName("Probando si los datos JSON se modifican")
+	void shouldModify() throws JsonMappingException, JsonProcessingException  {
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+		employees = systemApp.getEmployeeObjects();
+		Employee employee = employees.get(1);
+		employee.setFirstName("Texto prueba");
+		employees.set(1, employee);
+		systemApp.modifyJsonFile(employees);
+		employees = systemApp.getEmployeeObjects();
+		Employee employee2 = employees.get(1);
+		assertNotEquals(employee.getFirstName(),employee2.getFirstName());
 	}
 
 
