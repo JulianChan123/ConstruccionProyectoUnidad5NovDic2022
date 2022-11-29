@@ -151,7 +151,7 @@ public class MostrarDatos extends javax.swing.JFrame {
 
         lblFirstName.setText("First name: ");
 
-        lblLastName.setText("lblLastName: ");
+        lblLastName.setText("LastName: ");
 
         lblPhoto.setText("Photo: ");
 
