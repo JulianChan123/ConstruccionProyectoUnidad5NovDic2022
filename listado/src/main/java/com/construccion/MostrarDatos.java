@@ -63,6 +63,18 @@ public class MostrarDatos extends javax.swing.JFrame {
         employeeTable.setModel(tableModel);
     }
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
+        String id = txtId.getText();
+        employeeList.remove(Integer.parseInt(id));
+        setDatos(employeeList);
+        try {
+            systemApp.modifyJsonFile(employeeList);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String id = txtId.getText();
         txtFirstName.setText(employeeList.get(Integer.parseInt(id)).getFirstName());
@@ -145,6 +157,12 @@ public class MostrarDatos extends javax.swing.JFrame {
             }
         });
         btnEliminar.setText("Eliminar");
+
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         lblId.setText("id: ");
 
