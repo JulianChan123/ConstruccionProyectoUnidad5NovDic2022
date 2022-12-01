@@ -66,16 +66,15 @@ public class MostrarDatos extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
         String id = txtId.getText();
-        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
-        employeeList.remove(indexObject);
-        setDatos(employeeList);
-        try {
+        try{
+            int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
+            employeeList.remove(indexObject);
+            setDatos(employeeList);
             systemApp.modifyJsonFile(employeeList);
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
-        
+        catch(IndexOutOfBoundsException | JsonProcessingException e){
+            JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+        }
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
