@@ -65,8 +65,9 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
-        int id = Integer.parseInt(txtId.getText()) - 1;
-        employeeList.remove(id);
+        String id = txtId.getText();
+        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
+        employeeList.remove(indexObject);
         setDatos(employeeList);
         try {
             systemApp.modifyJsonFile(employeeList);
