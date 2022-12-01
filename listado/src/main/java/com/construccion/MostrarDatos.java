@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.awt.image.BufferedImage;
 
@@ -62,6 +63,39 @@ public class MostrarDatos extends javax.swing.JFrame {
             tableModel.addRow(data);
         }
         employeeTable.setModel(tableModel);
+    }
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) throws MalformedURLException{
+        
+        Employee employee = new Employee();
+        String id=txtId.getText();
+        boolean flag=true;
+
+        for (int j = 0; j < employeeList.size(); j++) {
+            if (employeeList.get(j).getId().equals(id)){
+                flag=false;
+            }
+        }
+        if (flag && Integer.parseInt(id)>0) {
+            employee.setId(id);
+            employee.setFirstName(txtFirstName.getText());
+            employee.setLastName(txtLastName.getText());
+            employee.setPhoto(txtPhoto.getText());
+            
+            try{
+                employeeList.add(employee);
+                setDatos(employeeList);
+                systemApp.modifyJsonFile(employeeList);
+            }
+            catch(IndexOutOfBoundsException | JsonProcessingException e){
+                JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "El id seleccionado ya existe o no puede ser menor a 1");
+
+        }
+        
+        
     }
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
@@ -153,6 +187,15 @@ public class MostrarDatos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(employeeTable);
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btnAgregarActionPerformed(evt);
+                } catch (MalformedURLException | RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "URL invalida");
+                }
+            }
+        });
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
