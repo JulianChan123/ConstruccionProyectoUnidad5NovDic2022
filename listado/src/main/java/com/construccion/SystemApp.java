@@ -83,6 +83,6 @@ public class SystemApp {
                 return employeeList.indexOf(employee);
             }
         }
-        return 0;
+        return -1;
     }
 }

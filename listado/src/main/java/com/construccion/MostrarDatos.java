@@ -75,6 +75,7 @@ public class MostrarDatos extends javax.swing.JFrame {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
