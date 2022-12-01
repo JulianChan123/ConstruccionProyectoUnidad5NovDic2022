@@ -64,8 +64,8 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
-        String id = txtId.getText();
-        employeeList.remove(Integer.parseInt(id));
+        int id = Integer.parseInt(txtId.getText()) - 1;
+        employeeList.remove(id);
         setDatos(employeeList);
         try {
             systemApp.modifyJsonFile(employeeList);
@@ -90,7 +90,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         employee.setFirstName(txtFirstName.getText());
         employee.setLastName(txtLastName.getText());
         employee.setPhoto(txtPhoto.getText());
-        employeeList.set(Integer.parseInt(txtId.getText()), employee);
+        employeeList.set(id, employee);
         setDatos(employeeList);
         try {
             systemApp.modifyJsonFile(employeeList);
