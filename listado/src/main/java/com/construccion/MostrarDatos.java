@@ -91,7 +91,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         employee.setFirstName(txtFirstName.getText());
         employee.setLastName(txtLastName.getText());
         employee.setPhoto(txtPhoto.getText());
-        employeeList.set(id, employee);
         setDatos(employeeList);
         try {
             systemApp.modifyJsonFile(employeeList);
