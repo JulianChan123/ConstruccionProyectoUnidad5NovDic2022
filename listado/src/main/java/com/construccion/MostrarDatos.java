@@ -41,6 +41,7 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     private void setModel(){
+        employeeTable.setRowHeight(100);
         String[] header = {"Id°","First name","Last name", "photo"};
         tableModel.setColumnIdentifiers(header);
         employeeTable.setModel(tableModel);
@@ -168,7 +169,7 @@ public class MostrarDatos extends javax.swing.JFrame {
 
         lblFirstName.setText("First name: ");
 
-        lblLastName.setText("lblLastName: ");
+        lblLastName.setText("LastName: ");
 
         lblPhoto.setText("Photo: ");
 
@@ -310,7 +311,7 @@ public class MostrarDatos extends javax.swing.JFrame {
     private Icon changeURLtoImage(String url){
         try {
             ImageIcon imageIcon = new ImageIcon(ImageIO.read(new URL(url)));
-            Image image = getScaledImage(imageIcon.getImage(), 50, 50);
+            Image image = getScaledImage(imageIcon.getImage(), 100, 100);
             imageIcon = new ImageIcon(image);
             Icon icon = (Icon) imageIcon ;
             return icon;
