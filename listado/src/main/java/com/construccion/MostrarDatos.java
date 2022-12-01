@@ -77,13 +77,16 @@ public class MostrarDatos extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String id = txtId.getText();
-        txtFirstName.setText(employeeList.get(Integer.parseInt(id)).getFirstName());
-        txtLastName.setText(employeeList.get(Integer.parseInt(id)).getLastName());
-        txtPhoto.setText(employeeList.get(Integer.parseInt(id)).getPhoto());
+        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
+        txtFirstName.setText(employeeList.get(indexObject).getFirstName());
+        txtLastName.setText(employeeList.get(indexObject).getLastName());
+        txtPhoto.setText(employeeList.get(indexObject).getPhoto());
     }     
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        Employee employee = employeeList.get(Integer.parseInt(txtId.getText()));
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {  
+        String id = txtId.getText();
+        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);                                           
+        Employee employee = employeeList.get(indexObject);
         employee.setFirstName(txtFirstName.getText());
         employee.setLastName(txtLastName.getText());
         employee.setPhoto(txtPhoto.getText());

@@ -75,4 +75,14 @@ public class SystemApp {
         JsonHandler jsonHandler = new JsonHandler();
         jsonHandler.modifyJsonFile(employeeList);
     }
+
+    public int searchEmployeeIndex(ArrayList<Employee> employeeList, String id){
+
+        for(Employee employee: employeeList){
+            if(employee.getId().equals(id)){
+                return employeeList.indexOf(employee);
+            }
+        }
+        return 0;
+    }
 }
