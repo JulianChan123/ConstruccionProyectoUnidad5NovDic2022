@@ -3,6 +3,9 @@ package com.construccion;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+
+import org.opentest4j.IncompleteExecutionException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -76,6 +79,7 @@ public class MostrarDatos extends javax.swing.JFrame {
                 flag=false;
             }
         }
+
         if (flag && Integer.parseInt(id)>0) {
             employee.setId(id);
             employee.setFirstName(txtFirstName.getText());
@@ -83,12 +87,18 @@ public class MostrarDatos extends javax.swing.JFrame {
             employee.setPhoto(txtPhoto.getText());
             
             try{
+                if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtId.getText().isEmpty() || txtPhoto.getText().isEmpty()){
+                    throw new IncompleteExecutionException();
+                }
                 employeeList.add(employee);
                 setDatos(employeeList);
                 systemApp.modifyJsonFile(employeeList);
             }
             catch(IndexOutOfBoundsException | JsonProcessingException e){
                 JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+            }
+            catch(IncompleteExecutionException e){
+                JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
             }
         }else{
             JOptionPane.showMessageDialog(null, "El id seleccionado ya existe o no puede ser menor a 1");
@@ -109,24 +119,46 @@ public class MostrarDatos extends javax.swing.JFrame {
         catch(IndexOutOfBoundsException | JsonProcessingException e){
             JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
         }
+        
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        String id = txtId.getText();
-        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
-        txtFirstName.setText(employeeList.get(indexObject).getFirstName());
-        txtLastName.setText(employeeList.get(indexObject).getLastName());
-        txtPhoto.setText(employeeList.get(indexObject).getPhoto());
+        try{
+            String id = txtId.getText();
+            int indexObject = systemApp.searchEmployeeIndex(employeeList, id);
+            txtFirstName.setText(employeeList.get(indexObject).getFirstName());
+            txtLastName.setText(employeeList.get(indexObject).getLastName());
+            txtPhoto.setText(employeeList.get(indexObject).getPhoto());
+            }
+        catch(IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+        }
     }     
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {  
-        String id = txtId.getText();
-        int indexObject = systemApp.searchEmployeeIndex(employeeList, id);                                           
-        Employee employee = employeeList.get(indexObject);
-        employee.setFirstName(txtFirstName.getText());
-        employee.setLastName(txtLastName.getText());
-        employee.setPhoto(txtPhoto.getText());
-        setDatos(employeeList);
+
+        try{
+
+            if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtId.getText().isEmpty() || txtPhoto.getText().isEmpty()){
+                throw new RuntimeException();
+            }
+            
+            String id = txtId.getText();
+            int indexObject = systemApp.searchEmployeeIndex(employeeList, id);                                           
+            Employee employee = employeeList.get(indexObject);
+            employee.setFirstName(txtFirstName.getText());
+            employee.setLastName(txtLastName.getText());
+            employee.setPhoto(txtPhoto.getText());
+
+            setDatos(employeeList);
+        }
+        catch( IndexOutOfBoundsException e ){
+            JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+        }
+        catch(RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+        }
+
         try {
             systemApp.modifyJsonFile(employeeList);
         } catch (JsonProcessingException e) {
@@ -191,7 +223,8 @@ public class MostrarDatos extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     btnAgregarActionPerformed(evt);
-                } catch (MalformedURLException | RuntimeException e) {
+                } 
+                catch (MalformedURLException | RuntimeException e) {
                     JOptionPane.showMessageDialog(null, "URL invalida");
                 }
             }
@@ -200,7 +233,12 @@ public class MostrarDatos extends javax.swing.JFrame {
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+                try{
+                    btnModificarActionPerformed(evt);
+                }
+                catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "URL invalida");
+                }
             }
         });
         btnEliminar.setText("Eliminar");
