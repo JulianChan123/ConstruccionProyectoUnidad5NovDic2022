@@ -42,5 +42,21 @@ public class JsonHandlerTest {
 		assertNotEquals(employee.getFirstName(),employee2.getFirstName());
 	}
 
+	@Test
+	@DisplayName("Probando si se agregan datos al JSON")
+	void shouldAdd() throws JsonMappingException, JsonProcessingException  {
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+		employees = systemApp.getEmployeeObjects();
+		int firtSize = employees.size();
+		Employee employee = new Employee();
+		employee.setId("4");
+		employee.setFirstName("asdas");
+		employee.setLastName("asdas");
+		employee.setPhoto("https://jsonformatter.org/img/Robert-Downey-Jr.jpg");
+		employees.add(employee);
+		systemApp.modifyJsonFile(employees);
+		int secondSize = employees.size();
+		assertEquals(firtSize, secondSize);
+	}
 
 }

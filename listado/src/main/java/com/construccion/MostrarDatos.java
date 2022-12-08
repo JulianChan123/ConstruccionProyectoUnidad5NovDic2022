@@ -69,43 +69,44 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) throws MalformedURLException{
-        
-        Employee employee = new Employee();
-        String id=txtId.getText();
-        boolean flag=true;
-
-        for (int j = 0; j < employeeList.size(); j++) {
-            if (employeeList.get(j).getId().equals(id)){
-                flag=false;
+        try{
+           
+            if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtId.getText().isEmpty() || txtPhoto.getText().isEmpty()){
+                throw new IncompleteExecutionException();
             }
-        }
 
-        if (flag && Integer.parseInt(id)>0) {
-            employee.setId(id);
-            employee.setFirstName(txtFirstName.getText());
-            employee.setLastName(txtLastName.getText());
-            employee.setPhoto(txtPhoto.getText());
-            
-            try{
-                if(txtFirstName.getText().isEmpty()|| txtLastName.getText().isEmpty() || txtId.getText().isEmpty() || txtPhoto.getText().isEmpty()){
-                    throw new IncompleteExecutionException();
+            Employee employee = new Employee();
+            String id=txtId.getText();
+            boolean flag=true;
+
+            for (int j = 0; j < employeeList.size(); j++) {
+                if (employeeList.get(j).getId().equals(id)){
+                    flag=false;
                 }
+            }
+
+            if (flag && Integer.parseInt(id)>0) {
+                employee.setId(id);
+                employee.setFirstName(txtFirstName.getText());
+                employee.setLastName(txtLastName.getText());
+                employee.setPhoto(txtPhoto.getText());
+                
+                
                 employeeList.add(employee);
                 setDatos(employeeList);
                 systemApp.modifyJsonFile(employeeList);
             }
-            catch(IndexOutOfBoundsException | JsonProcessingException e){
-                JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+            else{
+                JOptionPane.showMessageDialog(null, "El id seleccionado ya existe o no puede ser menor a 1");
+    
             }
-            catch(IncompleteExecutionException e){
-                JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "El id seleccionado ya existe o no puede ser menor a 1");
-
         }
-        
-        
+        catch(IndexOutOfBoundsException | JsonProcessingException e){
+            JOptionPane.showMessageDialog(null, "El id seleccionado no existe");
+        }
+        catch(IncompleteExecutionException e){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+        }
     }
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt){
